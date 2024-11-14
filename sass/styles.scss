@@ -1,0 +1,196 @@
+@use "./variables" as *;
+@use "./media" as *;
+
+/* Import Fonts */
+@font-face {
+  font-family: "Raleway";
+  src: url(../assets/fonts/Raleway/Raleway-VariableFont_wght.ttf);
+}
+
+/* Reset CSS */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  position: relative;
+  background-image: url(../assets/images/bg-mobile.png);
+  background-size: cover;
+  font-size: $font-size;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 50px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: $internal-padding-medium-mob;
+  font-family: $font-family;
+}
+
+.container__main {
+  padding: $section-padding-big-mob;
+  border-radius: 10px 100px 10px 10px;
+  background-color: $sec-bg;
+  .main__icons {
+    display: flex;
+    gap: 16px;
+    padding-top: $internal-padding-big-mob;
+    .icon__wrapper {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      height: min(50px, 15vw);
+      width: min(50px, 15vw);
+      background-color: $icon-bg;
+      margin-right: $internal-padding-medium-mob;
+      border-radius: 10px;
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+.container__storage {
+  min-height: 165px;
+  position: relative;
+  background-color: $sec-bg;
+  padding: $section-padding-small-mob;
+  border-radius: 10px;
+  text-align: center;
+  .storage__text {
+    color: rgba(100%, 100%, 100%, 50%);
+  }
+  .value,
+  .min-value,
+  .max-value {
+    color: $span-text;
+    font-weight: $font-bold;
+  }
+  .storage__left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 180px;
+    height: 75px;
+    margin: 0 auto;
+    background-color: $white;
+    border-radius: 10px;
+    color: $gray-color;
+    font-weight: $font-bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    .big {
+      margin-right: $internal-padding-small-mob;
+      font-size: 35px;
+      color: #000;
+    }
+  }
+}
+
+.storage__capacity {
+  width: 100%;
+  padding: $internal-padding-medium-mob 0;
+  .range {
+    position: relative;
+    width: 100%;
+    height: $internal-padding-medium-mob;
+    margin-bottom: $internal-padding-small-mob;
+    background-color: $icon-bg;
+    border-radius: 100px;
+    .line {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 81.5%;
+      height: calc(100% - 4px);
+      background-image: linear-gradient(
+        90deg,
+        $gradient-first,
+        $gradient-second
+      );
+      border-radius: inherit;
+    }
+    .line::before {
+      content: "";
+      position: absolute;
+      top: 1px;
+      right: 1px;
+      width: 10px;
+      height: 10px;
+      background-color: $white;
+      border-radius: 50%;
+    }
+  }
+  .values {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+/* Media Queries */
+body {
+  @include media("normal") {
+    background-image: url(../assets/images/bg-desktop.png);
+    background-position: 0% 100%;
+    background-color: $icon-bg;
+    background-size: 100vw 50vh;
+    background-repeat: no-repeat;
+  }
+}
+.container {
+  @include media("normal") {
+    max-width: 930px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: end;
+  }
+}
+.container__main {
+  @include media("normal") {
+    width: 40%;
+  }
+}
+.container__storage {
+  @include media("normal") {
+    text-align: left;
+    width: 60%;
+    min-height: 150px;
+    position: static;
+  }
+}
+.container__storage .storage__left {
+  @include media("normal") {
+    bottom: auto;
+    left: auto;
+    top: 0;
+    right: 40px;
+    transform: translate(0, 0);
+    border-bottom-right-radius: 0;
+  }
+}
+
+.storage__left::before {
+  @include media("normal") {
+    content: "";
+    position: absolute;
+    top: 55px;
+    right: 0px;
+    border: 20px solid;
+    border-color: transparent $white transparent transparent;
+  }
+}
